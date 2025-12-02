@@ -1307,7 +1307,7 @@ body.quiz-public main {
 <div class="loginBox">
 <h2>Bem-vindo ao Avaliare</h2>
 <p>Sistema de Feedback Profissional</p>
-<input type="text" id="companyIdInput" placeholder="ID da Empresa">
+<input type="text" id="companyIdInput" placeholder="Nome da Empresa (sem espaços)">
 <input type="password" id="passwordInput" placeholder="Senha de Acesso">
 <button class="btn btn-primary" id="loginBtn" style="width:100%; margin-top:20px">
 <span class="material-icons-outlined">login</span>
@@ -1344,7 +1344,7 @@ Entrar
 <!-- Home Section -->
 <section id="homeSection" class="active">
 <div class="container">
-<h2>Suas Pesquisas</h2>
+<center><h2>Suas Pesquisas</h2></center>
 <div class="notification-settings">
 <h3><span class="material-icons-outlined">notifications</span> Notificações por Email</h3>
 <div class="notification-toggle">
@@ -1375,28 +1375,32 @@ Salvar Configurações
 </div>
 </div>
 <div id="surveyList"></div>
-<button class="btn btn-primary" id="newSurveyBtn" style="margin-top: 20px;">
-<span class="material-icons-outlined">add</span>
-Nova Pesquisa
-</button>
+<center>
+  <button class="btn btn-primary" id="newSurveyBtn" style="margin-top: 20px;">
+  <span class="material-icons-outlined">add</span>
+    Nova Pesquisa
+  </button>
+</center>
 </div>
 </section>
 
 <!-- Create Section -->
 <section id="createSection">
 <div class="container">
-<h2>Criar Pesquisa</h2>
+<center><h2>Criar Pesquisa</h2></center>
 <input type="text" id="surveyTitle" placeholder="Título da pesquisa">
 <div id="questionsContainer"></div>
 <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
-<button class="btn btn-secondary" id="addQuestionBtn">
-<span class="material-icons-outlined">add</span>
-Adicionar Pergunta
-</button>
-<button class="btn btn-success" id="saveSurveyBtn">
-<span class="material-icons-outlined">save</span>
-Salvar Pesquisa
-</button>
+<center>
+  <button class="btn btn-secondary" id="addQuestionBtn">
+    <span class="material-icons-outlined">add</span>
+      Adicionar Pergunta
+  </button>
+  <button class="btn btn-success" id="saveSurveyBtn">
+    <span class="material-icons-outlined">save</span>
+      Salvar Pesquisa
+  </button>
+</center>
 </div>
 </div>
 </section>
@@ -1404,7 +1408,7 @@ Salvar Pesquisa
 <!-- Results Section -->
 <section id="resultsSection">
 <div class="container">
-<h2>Resultados</h2>
+<center><h2>Resultados</h2></center>
 <div id="resultsContainer"></div>
 </div>
 </section>
@@ -1412,7 +1416,7 @@ Salvar Pesquisa
 <!-- Profile Section -->
 <section id="profileSection">
 <div class="container">
-<h2>Perfil da Empresa</h2>
+<center><h2>Perfil da Empresa</h2></center>
 <div class="card">
 <div style="text-align: center; margin-bottom: 24px;">
 <img id="profileAvatarPreview" src="https://via.placeholder.com/120" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-primary);">
@@ -1425,7 +1429,7 @@ Alterar Foto
 </div>
 </div>
 <input type="text" id="profileCompanyName" placeholder="Nome da empresa">
-<textarea id="profileDescription" placeholder="Descrição da empresa (opcional)"></textarea>
+<textarea id="profileDescription" placeholder="Descrição curta da empresa (opcional)"></textarea>
 <button class="btn btn-primary" id="saveProfileBtn" style="width: 100%; margin-top: 20px;">
 <span class="material-icons-outlined">save</span>
 Salvar Perfil
@@ -1437,7 +1441,7 @@ Salvar Perfil
 <!-- Admin Section -->
 <section id="adminSection">
 <div class="container">
-<h2>Painel Administrativo</h2>
+<center><h2>Painel Administrativo</h2></center>
 <div id="adminContainer"></div>
 </div>
 </section>
@@ -2181,6 +2185,7 @@ function addQuestion(text = "", opts = []) {
       else if (type === "frequency") options = ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Sempre"];
       else if (type === "agreement") options = ["Discordo Totalmente", "Discordo", "Neutro", "Concordo", "Concordo Totalmente"];
       else if (type === "emoji") options = ["🤩", "😃", "🙂", "😐", "🙁"];
+      else if (type === "stars") options = ["🌟", "🌟🌟", "🌟🌟🌟", "🌟🌟🌟🌟", "🌟🌟🌟🌟🌟"];
       
       options.forEach(opt => addOption(optionsList, opt));
     };
@@ -2287,7 +2292,7 @@ async function loadPublicQuiz() {
     const d = await api('getSurvey', { companyId: publicCompanyId, surveyId: publicQuizId });
 
     if (!d) {
-      container.innerHTML = "<p style='text-align:center;color:var(--text-secondary)'>Pesquisa não encontrada</p>";
+      container.innerHTML = "<p style='text-align:center;color:var(--text-secondary)'>Ops! Pesquisa não encontrada</p>";
       return;
     }
 
@@ -2425,7 +2430,7 @@ async function renderQuizStep() {
   container.innerHTML = headerHTML + `
     <div class="quiz-content">
       <h3>Obrigado, ${userName}!</h3>
-      <p style="color: var(--text-secondary); margin-top: 8px;">Gostaria de deixar algum comentário adicional? (Opcional)</p>
+      <p style="color: var(--text-secondary); margin-top: 8px;">Gostaria de deixar algum breve comentário adicional? (Opcional)</p>
       <textarea id="commentBox" placeholder="Seu comentário (opcional)"></textarea>
       <div class="quiz-actions">
         <button class="btn btn-success" id="submitBtn"><span class="material-icons-outlined">send</span> Enviar Respostas</button>
@@ -2469,24 +2474,40 @@ function exportToCSV() {
     return;
   }
 
-  let csvContent = "data:text/csv;charset=utf-8,";
-  csvContent += "Pesquisa,Respondente,Data,";
-  
-  const maxQuestions = Math.max(...allSurveyStats.map(s => s.responses.length > 0 ? s.responses[0].answers.length : 0));
-  for (let i = 1; i <= maxQuestions; i++) csvContent += `Pergunta ${i},Resposta ${i},`;
-  csvContent += "Comentário\n";
+  // Sempre comece com BOM
+  let csv = "\ufeff";
 
+  // Cabeçalho
+  csv += "Pesquisa,Respondente,Data,";
+
+  const maxQuestions = Math.max(...allSurveyStats.map(s =>
+    s.responses.length > 0 ? s.responses[0].answers.length : 0
+  ));
+
+  for (let i = 1; i <= maxQuestions; i++) {
+    csv += `Pergunta ${i},Resposta ${i},`;
+  }
+  csv += "Comentário\n";
+
+  // Linhas
   allSurveyStats.forEach(survey => {
     survey.responses.forEach(response => {
       let row = `"${survey.title}","${response.name}","${new Date(response.timestamp).toLocaleDateString('pt-BR')}",`;
-      response.answers.forEach(answer => { row += `"${answer.question}","${answer.answer}",`; });
+
+      response.answers.forEach(answer => {
+        row += `"${answer.question}","${answer.answer}",`;
+      });
+
       row += `"${response.comment || ''}"\n`;
-      csvContent += row;
+      csv += row;
     });
   });
 
+  // Agora sim, gerar a URL do CSV
+  const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+
   const link = document.createElement("a");
-  link.setAttribute("href", encodeURI(csvContent));
+  link.setAttribute("href", csvContent);
   link.setAttribute("download", `relatorio_avaliare_${Date.now()}.csv`);
   document.body.appendChild(link);
   link.click();
