@@ -1307,7 +1307,7 @@ body.quiz-public main {
 <div class="loginBox">
 <h2>Bem-vindo ao Avaliare</h2>
 <p>Sistema de Feedback Profissional</p>
-<input type="text" id="companyIdInput" placeholder="Nome da Empresa (sem espaços)">
+<input type="text" id="companyIdInput" placeholder="NomeDaEmpresa (sem espaços)">
 <input type="password" id="passwordInput" placeholder="Senha de Acesso">
 <button class="btn btn-primary" id="loginBtn" style="width:100%; margin-top:20px">
 <span class="material-icons-outlined">login</span>
@@ -1390,8 +1390,8 @@ Salvar Configurações
 <center><h2>Criar Pesquisa</h2></center>
 <input type="text" id="surveyTitle" placeholder="Título da pesquisa">
 <div id="questionsContainer"></div>
-<div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
 <center>
+<div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
   <button class="btn btn-secondary" id="addQuestionBtn">
     <span class="material-icons-outlined">add</span>
       Adicionar Pergunta
@@ -1400,8 +1400,8 @@ Salvar Configurações
     <span class="material-icons-outlined">save</span>
       Salvar Pesquisa
   </button>
-</center>
 </div>
+</center>
 </div>
 </section>
 
@@ -2474,28 +2474,30 @@ function exportToCSV() {
     return;
   }
 
-  // Sempre comece com BOM
+  // BOM
   let csv = "\ufeff";
 
-  // Cabeçalho
-  csv += "Pesquisa,Respondente,Data,";
+  // Cabeçalho com ; (Excel BR)
+  csv += "Pesquisa;Respondente;Data;";
 
   const maxQuestions = Math.max(...allSurveyStats.map(s =>
     s.responses.length > 0 ? s.responses[0].answers.length : 0
   ));
 
   for (let i = 1; i <= maxQuestions; i++) {
-    csv += `Pergunta ${i},Resposta ${i},`;
+    csv += `Pergunta ${i};Resposta ${i};`;
   }
   csv += "Comentário\n";
 
   // Linhas
   allSurveyStats.forEach(survey => {
     survey.responses.forEach(response => {
-      let row = `"${survey.title}","${response.name}","${new Date(response.timestamp).toLocaleDateString('pt-BR')}",`;
+
+      let row =
+        `"${survey.title}";"${response.name}";"${new Date(response.timestamp).toLocaleDateString('pt-BR')}";`;
 
       response.answers.forEach(answer => {
-        row += `"${answer.question}","${answer.answer}",`;
+        row += `"${answer.question}";"${answer.answer}";`;
       });
 
       row += `"${response.comment || ''}"\n`;
@@ -2503,17 +2505,17 @@ function exportToCSV() {
     });
   });
 
-  // Agora sim, gerar a URL do CSV
+  // Gera URL com CSV já pronto
   const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
 
   const link = document.createElement("a");
-  link.setAttribute("href", csvContent);
-  link.setAttribute("download", `relatorio_avaliare_${Date.now()}.csv`);
+  link.href = csvContent;
+  link.download = `relatorio_avaliare_${Date.now()}.csv`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
 }
-
+  
 function applyFilters() { renderFilteredResults(); }
 
 function renderFilteredResults() {
