@@ -1276,6 +1276,22 @@ border:1px solid rgba(255,255,255,.3);
 position:relative;
 overflow:hidden;
 }
+
+/* --- Correção do espaço do topo --- */
+body header {
+  margin-bottom: 20px;
+}
+
+main {
+  padding-top: 90px; /* espaço para a navbar fixa */
+  padding-bottom: 110px; /* espaço para o bottom bar */
+}
+
+/* Em páginas públicas do quiz */
+body.quiz-public main {
+  padding-top: 20px; /* pois o quiz não usa header */
+  padding-bottom: 20px;
+  }
 </style>
 </head>
 <body>
