@@ -48,8 +48,8 @@ const db = admin.firestore()
 // Essas senhas agora ficam no servidor, não no front-end!
 // ============================================
 
-const LOGIN_PASSWORD = process.env.LOGIN_PASSWORD || "happynation"
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "happy123"
+const LOGIN_PASSWORD = process.env.LOGIN_PASSWORD
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "developerdiogo@gmail.com"
 
 // ============================================
