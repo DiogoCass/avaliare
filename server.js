@@ -13,14 +13,14 @@ const path = require("path")
 // ============================================
 // FIREBASE ADMIN SDK
 // ============================================
-// Usamos o Firebase Admin SDK para acessar o banco
+// Usei o Firebase Admin SDK para acessar o banco
 // de dados de forma segura, sem expor as credenciais.
 // ============================================
 
 const admin = require("firebase-admin")
 
 // Carrega as credenciais do arquivo .env ou variáveis de ambiente
-// Em produção, use variáveis de ambiente do seu serviço de hospedagem
+// Em produção, usei variáveis de ambiente do seu serviço de hospedagem
 const serviceAccount = {
   type: "service_account",
   project_id: process.env.FIREBASE_PROJECT_ID,
@@ -45,7 +45,7 @@ const db = admin.firestore()
 // ============================================
 // SENHAS SEGURAS (VARIÁVEIS DE AMBIENTE)
 // ============================================
-// Essas senhas agora ficam no servidor, não no front-end!
+// Essas senhas agora ficam no servidor, não no front-end!  :)
 // ============================================
 
 const LOGIN_PASSWORD = process.env.LOGIN_PASSWORD
@@ -105,7 +105,7 @@ function serveStatic(res, filePath) {
 // ============================================
 // ROTAS DA API
 // ============================================
-// Aqui definimos todas as operações do sistema.
+// Aqui defini todas as operações do sistema.
 // O front-end chama essas rotas via fetch().
 // ============================================
 
@@ -378,6 +378,13 @@ server.listen(PORT, () => {
 📍 URL: http://localhost:${PORT}
 📁 Pasta pública: ./public
 🔐 Credenciais protegidas no servidor
+🥂 TRABALHAO DE 7 MESES INTEIRO ME DEDICANDO
+DIA E NOITE A FINALIZAR ESSE PROJETO. E FINALMENTE,
+MEU PRIMEIRO SAAS ESTÁ PERFEITAMENTE PRONTO.
+😇 Obrigado Jeová meu Deus, por me dar sabedoria e saúde para
+me dedicar a isso, e obrigado Rebeca Araújo,
+minha querida e amada namorada, por me incentivar a continuar
+trabalhando nisso até o fim. Amém
 ============================================
   `)
 })
