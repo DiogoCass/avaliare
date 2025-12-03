@@ -2158,6 +2158,7 @@ function addQuestion(text = "", opts = []) {
       <button class="quick-btn" data-type="satisfaction">Satisfação</button>
       <button class="quick-btn" data-type="frequency">Frequência</button>
       <button class="quick-btn" data-type="agreement">Concordância</button>
+      <button class="quick-btn" data-type="stars">Estrelas</button>
     </div>
     <div class="options-list"></div>
     <center>
@@ -2575,7 +2576,7 @@ function updateResultsDisplay(surveyStats) {
       </div>
       <div class="filter-buttons">
         <button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" data-filter="all">Todas</button>
-        <button class="filter-btn ${currentFilter === 'recent' ? 'active' : ''}" data-filter="recent">Recentes (7 dias)</button>
+        <button class="filter-btn ${currentFilter === 'recent' ? 'active' : ''}" data-filter="recent">Recentes</button>
       </div>
       <button class="export-btn" onclick="exportToCSV()"><span class="material-icons-outlined">download</span> CSV</button>
     </div>
