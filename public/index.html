@@ -1313,6 +1313,20 @@ body.quiz-public main {
 <span class="material-icons-outlined">login</span>
 Entrar
 </button>
+<button class="btn btn-success" id="loginBtn"
+onclick="solicitarSenha()"
+style="width:100%; margin-top:20px">
+    <span class="material-icons-outlined">key</span> Solicitar Senha
+</button>
+
+<script>
+function solicitarSenha() {
+    alert('Obtenha uma senha pelo WhatsApp do criador +55 51 96748-252. Envie a palavra SENHA para recebê-la automaticamente');
+    
+    // Após clicar em OK no alert → redireciona
+    window.location.href = "https://wa.me/555196748252?text=SENHA";
+}
+</script>
 </div>
 <div class="watermarkk" onclick="window.location.href='https://avaliare.onrender.com/landingpage.html'">
    <div class="watermark-txt">
